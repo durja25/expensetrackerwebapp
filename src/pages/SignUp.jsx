@@ -3,10 +3,12 @@ import {Link, useNavigate} from "react-router-dom";
 import {assets} from "../assets/assets.js";
 import Input from "../components/Input.jsx";
 import {validateEmail, delay} from "../util/validation.js";
-// import axiosConfig from "../util/axiosConfig.jsx";
-// import API_ENDPOINTS from "../util/ApiEndpoints.js";
 import {LoaderCircle} from "lucide-react";
 import toast from "react-hot-toast";
+import ProfileImageSelection from "../components/ProfileImageSelection.jsx";
+import {API_ENDPOINTS} from "../util/ApiEndpoints.js";
+import axiosConfig from "../util/axiosConfig.jsx";
+import uploadProfileImage from "../util/uploadProfileImage.js";
 
 
 const SignUp = () => {
@@ -16,7 +18,7 @@ const SignUp = () => {
     const [name, setName] = useState("");
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-
+    const [profileImage, setProfileImage] = useState(null);
     // to navigate to login page
     const navigate = useNavigate();
 
@@ -25,6 +27,7 @@ const SignUp = () => {
         // stop loading the entire webpage
         e.preventDefault();
         setIsLoading(true);
+        let profileImageVar = "";
 
         // basic validation
         if (!name.trim() ) {
@@ -45,19 +48,28 @@ const SignUp = () => {
         setError("");
 
         try {
-            // const axiosResponse = await axiosConfig.post(API_ENDPOINTS.REGISTER, {
-            //     email: email,
-            //     password: password,
-            //     name: name,
-            // });
-            // if(axiosResponse.status === 201) {
-            //     toast.success("Sign up successfully");
-            // }
-            await delay(1000);
-            if(true) {
-                toast.success("Sign up successfully");
-                navigate("/Login");
+
+            // upload image
+            if (profileImage) {
+                const profileImageUrl = await uploadProfileImage(profileImage);
+                profileImageVar = profileImageUrl || "";
+
             }
+
+            const axiosResponse = await axiosConfig.post(API_ENDPOINTS.REGISTER, {
+                email: email,
+                password: password,
+                name: name,
+                profileImageUrl: profileImageVar,
+            });
+            if(axiosResponse.status === 201) {
+                toast.success("Sign up successfully");
+            }
+            // await delay(1000);
+            // if(true) {
+            //     toast.success("Sign up successfully");
+            //     navigate("/Login");
+            // }
 
         }catch(err) {
 
@@ -70,10 +82,7 @@ const SignUp = () => {
     };
     return (
         <div className="h-screen w-full relative flex items-center justify-center overflow-hidden">
-            {
-                //     bg image blured
-
-            }
+            {/*{ bg image blured           }*/}
             <img src={assets.login_bg} alt="Background"
                  className="absolute inset-0 w-full h-full object-cover filter blur-sm"/>
 
@@ -89,6 +98,7 @@ const SignUp = () => {
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div className="flex justify-center mb-6">
                             {/*profile image*/}
+                            <ProfileImageSelection image={ profileImage} setImage={setProfileImage}></ProfileImageSelection>
                         </div>
                         <div className="grid grid-col-2 md:grid-col-2 gap-2">
                             <Input value={name}

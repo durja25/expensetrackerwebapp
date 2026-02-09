@@ -39,25 +39,25 @@ const Login = ()=> {
 
         // API call
         try {
-            // const axiosResponse = await axiosConfig.post(API_ENDPOINTS.LOGIN, {
-            //     email: email,
-            //     password: password,
-            //
-            // });
-            // const { token, user } = await axiosResponse.data;
-            // if(axiosResponse.status === 201) {
-            //     toast.success("Login successfully");
-            //     if (token) {
-            //         localStorage.setItem("token", token);
-            //         setUser(user);
-            //         navigate("/dashboard");
-            //     }
-            // }
-            await delay(1000);
-            if (true) {
+            const axiosResponse = await axiosConfig.post(API_ENDPOINTS.LOGIN, {
+                email: email,
+                password: password,
+
+            });
+            const { token, user } = await axiosResponse.data;
+            if(axiosResponse.status === 201) {
                 toast.success("Login successfully");
-                navigate("/dashboard");
+                if (token) {
+                    localStorage.setItem("token", token);
+                    setUser(user);
+                    navigate("/dashboard");
+                }
             }
+            // await delay(1000);
+            // if (true) {
+            //     toast.success("Login successfully");
+            //     navigate("/dashboard");
+            // }
 
         } catch (err) {
 

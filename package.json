@@ -12,6 +12,7 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",
     "axios": "^1.13.4",
+    "cloudinary": "^2.9.0",
     "emoji-picker-react": "^4.17.3",
     "lucide-react": "^0.563.0",
     "moment": "^2.30.1",
