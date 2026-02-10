@@ -6,6 +6,7 @@ import {validateEmail, delay} from "../util/validation.js";
 import toast from "react-hot-toast";
 import axiosConfig from "../util/axiosConfig.jsx";
 import {AppContext, AppContextProvider} from "../context/AppContext.jsx";
+import {API_ENDPOINTS} from "../util/ApiEndpoints.js";
 
 const Login = ()=> {
 
@@ -45,7 +46,7 @@ const Login = ()=> {
 
             });
             const { token, user } = await axiosResponse.data;
-            if(axiosResponse.status === 201) {
+            if(axiosResponse.status === 200) {
                 toast.success("Login successfully");
                 if (token) {
                     localStorage.setItem("token", token);
@@ -59,7 +60,7 @@ const Login = ()=> {
             //     navigate("/dashboard");
             // }
 
-        } catch (err) {
+        } catch (error) {
 
             if (error.response && error.response.data) {
                 setError(error.response.data.message);

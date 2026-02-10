@@ -64,6 +64,7 @@ const SignUp = () => {
             });
             if(axiosResponse.status === 201) {
                 toast.success("Sign up successfully");
+                navigate("/Login");
             }
             // await delay(1000);
             // if(true) {
