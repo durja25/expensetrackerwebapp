@@ -50,6 +50,7 @@ const Login = ()=> {
                 toast.success("Login successfully");
                 if (token) {
                     localStorage.setItem("token", token);
+                    localStorage.setItem("user", JSON.stringify(user));
                     setUser(user);
                     navigate("/dashboard");
                 }

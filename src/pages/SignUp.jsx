@@ -61,6 +61,12 @@ const SignUp = () => {
                 password: password,
                 name: name,
                 profileImageUrl: profileImageVar,
+
+            },
+            {
+                headers: {
+                    Authorization: null
+                }
             });
             if(axiosResponse.status === 201) {
                 toast.success("Sign up successfully");
@@ -72,12 +78,14 @@ const SignUp = () => {
             //     navigate("/Login");
             // }
 
-        }catch(err) {
-
-            console.error("SomeThing Went Wrong", err);
-            setError(err);
+        }catch(error) {
+            console.log("FULL ERROR:", error);
+            console.log("RESPONSE DATA:", error.response?.data);
+            console.log("STATUS:", error.response?.status);
+            setError(error);
         }finally {
             setIsLoading(false);
+            e.preventDefault();
         }
 
     };
