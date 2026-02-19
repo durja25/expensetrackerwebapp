@@ -2,13 +2,13 @@ import {assets} from "../assets/assets.js";
 import Input from "../components/Input.jsx";
 import {useContext, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
-import {validateEmail, delay} from "../util/validation.js";
+import {validateEmail} from "../util/validation.js";
 import toast from "react-hot-toast";
 import axiosConfig from "../util/axiosConfig.jsx";
-import {AppContext, AppContextProvider} from "../context/AppContext.jsx";
+import {AppContext} from "../context/AppContext.jsx";
 import {API_ENDPOINTS} from "../util/ApiEndpoints.js";
 
-const Login = ()=> {
+const Login = () => {
 
     // state vars
     const [email, setEmail] = useState("")
@@ -45,8 +45,8 @@ const Login = ()=> {
                 password: password,
 
             });
-            const { token, user } = await axiosResponse.data;
-            if(axiosResponse.status === 200) {
+            const {token, user} = await axiosResponse.data;
+            if (axiosResponse.status === 200) {
                 toast.success("Login successfully");
                 if (token) {
                     localStorage.setItem("token", token);
@@ -114,7 +114,7 @@ const Login = ()=> {
                         )}
 
                         <button disabled={isloading}
-                                className={`btn-primary bg-blue-300 rounded-2xl  w-full py-3 text-lg font-medium hover:cursor-pointer flex items-center justify-center gap-2 ${ isloading ? "opacity-60 cursor-not-allowed" : ""}`}
+                                className={`btn-primary bg-blue-300 rounded-2xl  w-full py-3 text-lg font-medium hover:cursor-pointer flex items-center justify-center gap-2 ${isloading ? "opacity-60 cursor-not-allowed" : ""}`}
                                 type={"submit"}>
                             {isloading ? (<>
                                     <LoaderCircle className="animate-pulse w-5 h-5 "/>

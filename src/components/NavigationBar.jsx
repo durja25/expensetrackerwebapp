@@ -33,7 +33,7 @@ const NavigationBar = ({activeMenu}) => {
         return () => {
             document.removeEventListener("mousedown", handleOutSideClick);
         }
-    },[showDropDown]);
+    }, [showDropDown]);
 
     return (
         <div

@@ -1,6 +1,8 @@
 import Dashboard from "../components/Dashboard.jsx";
+import {useUser} from "../hooks/useUser.jsx";
 
-const Home= ()=>{
+const Home = () => {
+    useUser();
     return (
         <div>
             <Dashboard activeMenu="Dashboard">

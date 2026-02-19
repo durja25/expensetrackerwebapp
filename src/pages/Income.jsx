@@ -1,6 +1,6 @@
 import Dashboard from "../components/Dashboard.jsx";
 
-const Income=()=>{
+const Income = () => {
     return (
         <Dashboard activeMenu="Income">
             This is Income Page

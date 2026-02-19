@@ -37,13 +37,13 @@ axiosConfig.interceptors.response.use((response) => {
     if (err.response) {
         if (err.status === 401) {
             window.location.href = "/login";
-            console.error("Response interceptors 401 :"+err.message);
+            console.error("Response interceptors 401 :" + err.message);
 
         } else if (err.status === 500) {
-            console.error("Response interceptors 500 :"+err.message);
+            console.error("Response interceptors 500 :" + err.message);
         }
     } else if (err.code === "ECONNRESET") {
-        console.error("Response interceptors ECONNRESET  :"+err.message);
+        console.error("Response interceptors ECONNRESET  :" + err.message);
 
     }
     return Promise.reject(err);

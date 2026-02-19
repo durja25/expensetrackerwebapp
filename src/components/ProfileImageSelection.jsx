@@ -1,7 +1,7 @@
 import {useRef, useState} from "react";
 import {Trash, Upload, User} from "lucide-react";
 
-const ProfileImageSelection = ({image,setImage}) => {
+const ProfileImageSelection = ({image, setImage}) => {
 
     const inputRef = useRef(null);
     const [preview, setPreview] = useState(null);
@@ -9,7 +9,7 @@ const ProfileImageSelection = ({image,setImage}) => {
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
-        if (file){
+        if (file) {
             setImage(file);
 
             const preview = URL.createObjectURL(file);
@@ -19,7 +19,7 @@ const ProfileImageSelection = ({image,setImage}) => {
 
     }
 
-    const handleRemoveImage = (e) =>{
+    const handleRemoveImage = (e) => {
         e.preventDefault();
         setPreview(null);
 
@@ -42,7 +42,7 @@ const ProfileImageSelection = ({image,setImage}) => {
                 <div className="w-20 h-20 flex items-center justify-center bg-slate-400 rounded-full relative">
                     <User className=" text-slate-500 " size="30"/>
                     <button
-                        onClick={ (e)=> onChooseFile(e)}
+                        onClick={(e) => onChooseFile(e)}
                         className="w-8 h-8 flex items-center justify-center bg-primary test-white rounded-full absolute -bottom-1 -right-1">
                         <Upload size={15} className="text-slate-500"/>
                     </button>

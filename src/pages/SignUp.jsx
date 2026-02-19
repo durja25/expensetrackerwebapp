@@ -2,7 +2,7 @@ import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {assets} from "../assets/assets.js";
 import Input from "../components/Input.jsx";
-import {validateEmail, delay} from "../util/validation.js";
+import {validateEmail} from "../util/validation.js";
 import {LoaderCircle} from "lucide-react";
 import toast from "react-hot-toast";
 import ProfileImageSelection from "../components/ProfileImageSelection.jsx";
@@ -30,17 +30,17 @@ const SignUp = () => {
         let profileImageVar = "";
 
         // basic validation
-        if (!name.trim() ) {
+        if (!name.trim()) {
             setError("Name is required");
             setIsLoading(false);
             return;
         }
-        if (!validateEmail(email) ) {
+        if (!validateEmail(email)) {
             setError("Please enter a valid email");
             setIsLoading(false);
             return;
         }
-        if (!password.trim() ) {
+        if (!password.trim()) {
             setError("Password is required");
             setIsLoading(false);
             return;
@@ -57,18 +57,18 @@ const SignUp = () => {
             }
 
             const axiosResponse = await axiosConfig.post(API_ENDPOINTS.REGISTER, {
-                email: email,
-                password: password,
-                name: name,
-                profileImageUrl: profileImageVar,
+                    email: email,
+                    password: password,
+                    name: name,
+                    profileImageUrl: profileImageVar,
 
-            },
-            {
-                headers: {
-                    Authorization: null
-                }
-            });
-            if(axiosResponse.status === 201) {
+                },
+                {
+                    headers: {
+                        Authorization: null
+                    }
+                });
+            if (axiosResponse.status === 201) {
                 toast.success("Sign up successfully");
                 navigate("/Login");
             }
@@ -78,12 +78,12 @@ const SignUp = () => {
             //     navigate("/Login");
             // }
 
-        }catch(error) {
+        } catch (error) {
             console.log("FULL ERROR:", error);
             console.log("RESPONSE DATA:", error.response?.data);
             console.log("STATUS:", error.response?.status);
             setError(error);
-        }finally {
+        } finally {
             setIsLoading(false);
             e.preventDefault();
         }
@@ -107,7 +107,8 @@ const SignUp = () => {
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div className="flex justify-center mb-6">
                             {/*profile image*/}
-                            <ProfileImageSelection image={ profileImage} setImage={setProfileImage}></ProfileImageSelection>
+                            <ProfileImageSelection image={profileImage}
+                                                   setImage={setProfileImage}></ProfileImageSelection>
                         </div>
                         <div className="grid grid-col-2 md:grid-col-2 gap-2">
                             <Input value={name}
@@ -133,14 +134,14 @@ const SignUp = () => {
                         )}
 
                         <button disabled={isLoading}
-                            className={`btn-primary bg-blue-300 rounded-2xl  w-full py-3 text-lg font-medium flex items-center justify-center gap-2 hover:cursor-pointer ${isLoading? 'opacity-60 cursor-not-allowed':''}`}
-                            type={"submit"}>
+                                className={`btn-primary bg-blue-300 rounded-2xl  w-full py-3 text-lg font-medium flex items-center justify-center gap-2 hover:cursor-pointer ${isLoading ? 'opacity-60 cursor-not-allowed' : ''}`}
+                                type={"submit"}>
                             {isLoading ? (
                                 <>
-                                    <LoaderCircle className="animate-spin w-5 h-5" />
-                                        Signing up ...
+                                    <LoaderCircle className="animate-spin w-5 h-5"/>
+                                    Signing up ...
                                 </>
-                            ) : "Sign Up" }
+                            ) : "Sign Up"}
                         </button>
                         <p className="text-sm text-slate-800 text-center mt-6">
                             Already Have An Account?

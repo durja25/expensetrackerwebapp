@@ -1,5 +1,5 @@
 import NavigationBar from "./NavigationBar.jsx";
-import {useContext, useEffect} from "react";
+import {useContext} from "react";
 import {AppContext} from "../context/AppContext.jsx";
 import SideBar from "./SideBar.jsx";
 
