@@ -4,18 +4,18 @@ import {useNavigate} from "react-router-dom";
 import {LogOut, Menu, User, X} from "lucide-react";
 import {assets} from "../assets/assets.js";
 
-const NavigationBar = (e) => {
+const NavigationBar = () => {
     const [openSidebar, setOpenSidebar] = useState(false);
     const [showDropDown, setShowDropDown] = useState(false);
     const dropDownRef = useRef(null);
     const {user, clearUser} = useContext(AppContext);
     const navigate = useNavigate();
 
-    const handleLogout = (e) => {
-        navigate("/login");
+    const handleLogout = () => {
         localStorage.clear();
-        setOpenSidebar(false);
         clearUser();
+        setOpenSidebar(false);
+        navigate("/login");
 
     };
     return (

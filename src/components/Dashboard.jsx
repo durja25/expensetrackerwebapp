@@ -1,4 +1,3 @@
-
 import NavigationBar from "./NavigationBar.jsx";
 import {useContext, useEffect} from "react";
 import {AppContext} from "../context/AppContext.jsx";
@@ -6,27 +5,26 @@ import {useNavigate} from "react-router-dom";
 import SideBar from "./SideBar.jsx";
 
 const Dashboard = () => {
-    const {userData} = useContext(AppContext)
-    const navigate = useNavigate();
-
+    const {user} = useContext(AppContext)
+    // const navigate = useNavigate();
 
 
     return (
         <div>
-            <NavigationBar />
-            {userData ? (
+            <NavigationBar/>
+            {user && (
                 <div className="flex">
                     <div className="max-[1080px]:hidden">
                         {/*Side Bar Context*/}
-                        <SideBar />
+                        <SideBar/>
 
 
                     </div>
                     <div>Right Side Content</div>
                 </div>
-            ): navigate("/login")}
+            )}
 
         </div>
-    );
+    )
 }
 export default Dashboard;
