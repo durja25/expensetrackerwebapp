@@ -1,26 +1,25 @@
 import NavigationBar from "./NavigationBar.jsx";
 import {useContext, useEffect} from "react";
 import {AppContext} from "../context/AppContext.jsx";
-import {useNavigate} from "react-router-dom";
 import SideBar from "./SideBar.jsx";
 
-const Dashboard = () => {
+const Dashboard = ({children, activeMenu}) => {
     const {user} = useContext(AppContext)
     // const navigate = useNavigate();
 
 
     return (
         <div>
-            <NavigationBar/>
+            <NavigationBar activeMenu={activeMenu}/>
             {user && (
                 <div className="flex">
                     <div className="max-[1080px]:hidden">
                         {/*Side Bar Context*/}
-                        <SideBar/>
+                        <SideBar activeMenu={activeMenu}/>
 
 
                     </div>
-                    <div>Right Side Content</div>
+                    <div className="grow mx-5">{children}</div>
                 </div>
             )}
 

@@ -1,10 +1,10 @@
-import {useContext, useRef, useState} from "react";
+import {useContext, useEffect, useRef, useState} from "react";
 import {AppContext} from "../context/AppContext.jsx";
 import {useNavigate} from "react-router-dom";
-import {LogOut, Menu, User, X} from "lucide-react";
+import {LogOut, Menu, Sidebar, User, X} from "lucide-react";
 import {assets} from "../assets/assets.js";
 
-const NavigationBar = () => {
+const NavigationBar = ({activeMenu}) => {
     const [openSidebar, setOpenSidebar] = useState(false);
     const [showDropDown, setShowDropDown] = useState(false);
     const dropDownRef = useRef(null);
@@ -18,6 +18,23 @@ const NavigationBar = () => {
         navigate("/login");
 
     };
+
+    useEffect(() => {
+        // lets you synchronize a profiledorpdown with an external system
+        const handleOutSideClick = (event) => {
+            if (dropDownRef.current && !dropDownRef.current.contains(event.target)) {
+                setShowDropDown(false)
+            }
+        }
+        if (showDropDown) {
+            document.addEventListener("mousedown", handleOutSideClick);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleOutSideClick);
+        }
+    },[showDropDown]);
+
     return (
         <div
             className="flex items-center justify-between gap-5 bg-white border border-b border-grey-200/50 backdrop-blur-2xl py-4 px-4 sm:px-7 sticky top-0 z-30">
@@ -74,7 +91,7 @@ const NavigationBar = () => {
                                 onClick={(e) => handleLogout(e)}
                                 className="flex items-center gap-3 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors duration-150">
                                 <LogOut className="w-4 h-4 text-gray-500 "/>
-                                    <span>Logout</span>
+                                <span>Logout</span>
                             </button>
 
                         </div>
@@ -84,6 +101,11 @@ const NavigationBar = () => {
             </div>
 
             {/*Mobile view*/}
+            {openSidebar && (
+                <div className="fixed left-0 right-0 bg-white border-b border-gray-200 lg:hidden z-20 top-[73px]">
+                    <Sidebar activeMenu={activeMenu}/>
+                </div>
+            )}
         </div>
     );
 }

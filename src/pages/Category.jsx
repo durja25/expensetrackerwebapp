@@ -1,7 +1,10 @@
+import Dashboard from "../components/Dashboard.jsx";
 
 const Category =()=> {
     return (
-        <div> Catagory</div>
+        <Dashboard activeMenu="Category">
+            This is Category Page
+        </Dashboard>
     )
 }
 
